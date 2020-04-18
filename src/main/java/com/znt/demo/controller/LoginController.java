@@ -5,7 +5,9 @@ import com.znt.demo.service.api.LoginService;
 import com.znt.demo.util.LoginCacheUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -21,7 +23,9 @@ public class LoginController {
     LoginService loginService;
 
     @PostMapping("/login")
+    @ResponseBody
     public LoginUser doLogin(LoginUser loginUser, HttpSession session, HttpServletResponse response){
+        System.out.println(loginUser);
         LoginUser loginUser1 = loginService.queryByUser(loginUser);
         if(loginUser1 ==null) {
             session.setAttribute("msg","用户名和密码错误");
